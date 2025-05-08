@@ -8,7 +8,6 @@ public class GameInput : MonoBehaviour
     {
         playerInputAction = new PlayerInputAction();
         playerInputAction.Player.Enable();
-    
     }
 
     public Vector2 GetMovementVectorNormalized()
