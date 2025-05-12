@@ -1,20 +1,134 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
+    public event EventHandler<OnSelectCounterChangedEventArgs> OnSelectedCounterChanged;
+
+    public class OnSelectCounterChangedEventArgs : EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
+
     [SerializeField]
     private float moveSpeed = 7f;
 
     [SerializeField]
     private GameInput gameInput;
 
+    [SerializeField]
+    private LayerMask counterLayerMask;
+
     private bool isWalking = false;
+    private Vector3 lastInteractDir;
+    private ClearCounter selectedCounter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() { }
+    void Start()
+    {
+        gameInput.OnInteraction += GameInput_OnInteraction;
+    }
+
+    private void GameInput_OnInteraction(object sender, System.EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.Interact();
+        }
+    }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("There is more than one player instance");
+        }
+        Instance = this;
+    }
 
     // Update is called once per frame
     private void Update()
+    {
+        HandleMovement();
+        HandleInteraction();
+    }
+
+    public bool IsWalking()
+    {
+        return isWalking;
+    }
+
+    private void HandleInteraction()
+    {
+        float interactDistance = 2f;
+
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+        else
+        {
+            lastInteractDir = transform.forward;
+        }
+
+        RaycastHit raycastHit;
+        if (
+            Physics.Raycast(
+                transform.position,
+                lastInteractDir,
+                out raycastHit,
+                interactDistance,
+                counterLayerMask
+            )
+        )
+        {
+            ClearCounter clearCounter = null;
+            if (raycastHit.transform.TryGetComponent(out clearCounter))
+            {
+                Debug.Log("ClearCounter found on hit object: " + raycastHit.transform.name);
+            }
+            else if (
+                raycastHit.transform.parent != null
+                && raycastHit.transform.parent.TryGetComponent(out clearCounter)
+            )
+            {
+                Debug.Log("ClearCounter found on parent: " + raycastHit.transform.parent.name);
+            }
+            else
+            {
+                Debug.Log(
+                    "No ClearCounter component on " + raycastHit.transform.name + " or its parent"
+                );
+            }
+
+            if (clearCounter != null)
+            {
+                if (clearCounter != selectedCounter)
+                {
+                    SetSelectedCounter(clearCounter);
+                }
+            }
+            else
+            {
+                SetSelectedCounter(null);
+            }
+        }
+        else
+        {
+            SetSelectedCounter(null);
+            Debug.Log("Raycast missed");
+        }
+
+        Debug.Log(selectedCounter);
+    }
+
+    private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
@@ -94,8 +208,28 @@ public class Player : MonoBehaviour
         isWalking = moveDir != Vector3.zero;
     }
 
-    public bool IsWalking()
+    private void SetSelectedCounter(ClearCounter selectedCounter)
     {
-        return isWalking;
+        this.selectedCounter = selectedCounter;
+
+        OnSelectedCounterChanged?.Invoke(
+            this,
+            new OnSelectCounterChangedEventArgs { selectedCounter = selectedCounter }
+        );
+    }
+
+    // Helper method to convert LayerMask to readable string
+    private string LayerMaskToString(LayerMask layerMask)
+    {
+        int mask = layerMask.value;
+        System.Text.StringBuilder result = new System.Text.StringBuilder();
+        for (int i = 0; i < 32; i++)
+        {
+            if ((mask & (1 << i)) != 0)
+            {
+                result.Append(LayerMask.LayerToName(i)).Append(" ");
+            }
+        }
+        return result.Length > 0 ? result.ToString() : "None";
     }
 }
