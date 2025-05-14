@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IKichentObjectParent
 {
     public static Player Instance { get; private set; }
 
@@ -21,6 +21,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private LayerMask counterLayerMask;
 
+    private KitchenObject kitchenObject;
+
+    [SerializeField]
+    private Transform kitchenObjectHoldPoint;
+
     private bool isWalking = false;
     private Vector3 lastInteractDir;
     private ClearCounter selectedCounter;
@@ -35,7 +40,7 @@ public class Player : MonoBehaviour
     {
         if (selectedCounter != null)
         {
-            selectedCounter.Interact();
+            selectedCounter.Interact(this);
         }
     }
 
@@ -72,10 +77,6 @@ public class Player : MonoBehaviour
         {
             lastInteractDir = moveDir;
         }
-        else
-        {
-            lastInteractDir = transform.forward;
-        }
 
         RaycastHit raycastHit;
         if (
@@ -91,20 +92,20 @@ public class Player : MonoBehaviour
             ClearCounter clearCounter = null;
             if (raycastHit.transform.TryGetComponent(out clearCounter))
             {
-                Debug.Log("ClearCounter found on hit object: " + raycastHit.transform.name);
+                /*Debug.Log("ClearCounter found on hit object: " + raycastHit.transform.name);*/
             }
             else if (
                 raycastHit.transform.parent != null
                 && raycastHit.transform.parent.TryGetComponent(out clearCounter)
             )
             {
-                Debug.Log("ClearCounter found on parent: " + raycastHit.transform.parent.name);
+                /*Debug.Log("ClearCounter found on parent: " + raycastHit.transform.parent.name);*/
             }
             else
             {
-                Debug.Log(
-                    "No ClearCounter component on " + raycastHit.transform.name + " or its parent"
-                );
+                /*Debug.Log(*/
+                /*    "No ClearCounter component on " + raycastHit.transform.name + " or its parent"*/
+                /*);*/
             }
 
             if (clearCounter != null)
@@ -122,10 +123,8 @@ public class Player : MonoBehaviour
         else
         {
             SetSelectedCounter(null);
-            Debug.Log("Raycast missed");
+            /*Debug.Log("Raycast missed");*/
         }
-
-        Debug.Log(selectedCounter);
     }
 
     private void HandleMovement()
@@ -231,5 +230,30 @@ public class Player : MonoBehaviour
             }
         }
         return result.Length > 0 ? result.ToString() : "None";
+    }
+
+    public Transform GetKitchenObjectFollowTransform()
+    {
+        return kitchenObjectHoldPoint;
+    }
+
+    public void SetKitchenObject(KitchenObject kitchenObject)
+    {
+        this.kitchenObject = kitchenObject;
+    }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
+
+    public void ClearKitchenObject()
+    {
+        kitchenObject = null;
+    }
+
+    public bool HasKitchenObject()
+    {
+        return kitchenObject != null;
     }
 }
