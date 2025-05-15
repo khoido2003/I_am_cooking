@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, IKichentObjectParent
 
     public class OnSelectCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
 
     [SerializeField]
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour, IKichentObjectParent
 
     private bool isWalking = false;
     private Vector3 lastInteractDir;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -89,14 +89,14 @@ public class Player : MonoBehaviour, IKichentObjectParent
             )
         )
         {
-            ClearCounter clearCounter = null;
-            if (raycastHit.transform.TryGetComponent(out clearCounter))
+            BaseCounter baseCounter = null;
+            if (raycastHit.transform.TryGetComponent(out baseCounter))
             {
                 /*Debug.Log("ClearCounter found on hit object: " + raycastHit.transform.name);*/
             }
             else if (
                 raycastHit.transform.parent != null
-                && raycastHit.transform.parent.TryGetComponent(out clearCounter)
+                && raycastHit.transform.parent.TryGetComponent(out baseCounter)
             )
             {
                 /*Debug.Log("ClearCounter found on parent: " + raycastHit.transform.parent.name);*/
@@ -108,11 +108,11 @@ public class Player : MonoBehaviour, IKichentObjectParent
                 /*);*/
             }
 
-            if (clearCounter != null)
+            if (baseCounter != null)
             {
-                if (clearCounter != selectedCounter)
+                if (baseCounter != selectedCounter)
                 {
-                    SetSelectedCounter(clearCounter);
+                    SetSelectedCounter(baseCounter);
                 }
             }
             else
@@ -207,7 +207,7 @@ public class Player : MonoBehaviour, IKichentObjectParent
         isWalking = moveDir != Vector3.zero;
     }
 
-    private void SetSelectedCounter(ClearCounter selectedCounter)
+    private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
 

@@ -16,7 +16,7 @@ public class GameInput : MonoBehaviour
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-Debug.Log("Interact action performed");
+        Debug.Log("Interact action performed");
         OnInteraction?.Invoke(this, EventArgs.Empty);
     }
 
