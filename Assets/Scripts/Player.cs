@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IKichentObjectParent
+public class Player : MonoBehaviour, IKitchentObjectParent
 {
     public static Player Instance { get; private set; }
 
+    // Event to select counter
     public event EventHandler<OnSelectCounterChangedEventArgs> OnSelectedCounterChanged;
 
     public class OnSelectCounterChangedEventArgs : EventArgs
@@ -33,7 +34,9 @@ public class Player : MonoBehaviour, IKichentObjectParent
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Subscribe to Event triggered from GameInput
         gameInput.OnInteraction += GameInput_OnInteraction;
+        gameInput.OnInteractionAlternate += GameInput_OnInteractionAlternate;
     }
 
     private void GameInput_OnInteraction(object sender, System.EventArgs e)
@@ -41,6 +44,16 @@ public class Player : MonoBehaviour, IKichentObjectParent
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
+            Debug.Log("Found something here");
+        }
+    }
+
+    private void GameInput_OnInteractionAlternate(object sender, System.EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.InteractAlternate(this);
+            Debug.Log("Found something here");
         }
     }
 
@@ -92,20 +105,20 @@ public class Player : MonoBehaviour, IKichentObjectParent
             BaseCounter baseCounter = null;
             if (raycastHit.transform.TryGetComponent(out baseCounter))
             {
-                /*Debug.Log("ClearCounter found on hit object: " + raycastHit.transform.name);*/
+                // Debug.Log("ClearCounter found on hit object: " + raycastHit.transform.name);
             }
             else if (
                 raycastHit.transform.parent != null
                 && raycastHit.transform.parent.TryGetComponent(out baseCounter)
             )
             {
-                /*Debug.Log("ClearCounter found on parent: " + raycastHit.transform.parent.name);*/
+                // Debug.Log("ClearCounter found on parent: " + raycastHit.transform.parent.name);
             }
             else
             {
-                /*Debug.Log(*/
-                /*    "No ClearCounter component on " + raycastHit.transform.name + " or its parent"*/
-                /*);*/
+                // Debug.Log(
+                //     "No ClearCounter component on " + raycastHit.transform.name + " or its parent"
+                // );
             }
 
             if (baseCounter != null)
@@ -123,7 +136,7 @@ public class Player : MonoBehaviour, IKichentObjectParent
         else
         {
             SetSelectedCounter(null);
-            /*Debug.Log("Raycast missed");*/
+            // Debug.Log("Raycast missed");
         }
     }
 
@@ -215,6 +228,7 @@ public class Player : MonoBehaviour, IKichentObjectParent
     {
         this.selectedCounter = selectedCounter;
 
+        // Trigger event to selected counter
         OnSelectedCounterChanged?.Invoke(
             this,
             new OnSelectCounterChangedEventArgs { selectedCounter = selectedCounter }

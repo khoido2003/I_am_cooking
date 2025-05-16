@@ -4,7 +4,11 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     private PlayerInputAction playerInputAction;
+
+    // Trigger event when interact with T
     public event EventHandler OnInteraction;
+
+    public event EventHandler OnInteractionAlternate;
 
     private void Awake()
     {
@@ -12,12 +16,23 @@ public class GameInput : MonoBehaviour
         playerInputAction.Player.Enable();
 
         playerInputAction.Player.Interact.performed += Interact_performed;
+        playerInputAction.Player.InteractAlternate.performed += InteractAlternate_performed;
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        // Trigger interaction event
         Debug.Log("Interact action performed");
         OnInteraction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void InteractAlternate_performed(
+        UnityEngine.InputSystem.InputAction.CallbackContext obj
+    )
+    {
+        // Trigger interaction event
+        Debug.Log("Interact alternate action performed");
+        OnInteractionAlternate?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized()
