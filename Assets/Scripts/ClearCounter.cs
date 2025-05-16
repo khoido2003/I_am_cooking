@@ -5,8 +5,6 @@ public class ClearCounter : BaseCounter
     [SerializeField]
     private KitchenObjectSO kitchenObjectSO;
 
-    private void Update() { }
-
     public override void Interact(Player player)
     {
         /*if (HasKitchenObject())*/
@@ -20,5 +18,32 @@ public class ClearCounter : BaseCounter
         /*    // Give the object to player*/
         /*    kitchenObject.SetKitchenObjectParent(player);*/
         /*}*/
+
+        if (!HasKitchenObject())
+        {
+            // There is no Kitchen Object here
+            if (player.HasKitchenObject())
+            {
+                player.GetKitchenObject().SetKitchenObjectParent(this);
+            }
+            else
+            {
+                // Player has nothing on hand
+            }
+        }
+        else
+        {
+            // There is a kitchen object here
+            if (player.HasKitchenObject())
+            {
+                // Player is carrying something
+            }
+            else
+            {
+                // Player is not carrying anything
+                GetKitchenObject().SetKitchenObjectParent(player);
+
+            }
+        }
     }
 }
