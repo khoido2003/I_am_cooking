@@ -115,6 +115,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1053951602216003622, guid: 711efad209ca5bb4d810ca191d2f67c5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.33
+      objectReference: {fileID: 0}
     - target: {fileID: 4752809671780622574, guid: 711efad209ca5bb4d810ca191d2f67c5, type: 3}
       propertyPath: m_Name
       value: ClearCounter
@@ -195,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab17faf9e9e39e4d9c01f093bdd99fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenObjectSO: {fileID: 11400000, guid: ce03bbf0034028e47a2e2d9dfcc2e08f, type: 2}
   counterTopPoint: {fileID: 5008052560337638479}
+  kitchenObjectSO: {fileID: 11400000, guid: ce03bbf0034028e47a2e2d9dfcc2e08f, type: 2}
 --- !u!4 &5008052560337638479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1053951602216003622, guid: 711efad209ca5bb4d810ca191d2f67c5, type: 3}
