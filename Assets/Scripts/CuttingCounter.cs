@@ -1,9 +1,23 @@
+using System;
 using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
+    // Event for progress bar
+    public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+
+    public class OnProgressChangedEventArgs : EventArgs
+    {
+        public float progressNormalized;
+    }
+
+    // Event for animation
+    public event EventHandler OnCut;
+
     [SerializeField]
     private CuttingRecipeSO[] cuttingRecipeSOArray;
+
+    private int cuttingProgress;
 
     public override void Interact(Player player)
     {
@@ -17,6 +31,23 @@ public class CuttingCounter : BaseCounter
                 {
                     // Player carry something that can be cut then they can place here
                     player.GetKitchenObject().SetKitchenObjectParent(this);
+
+                    // Init cutting progress
+                    cuttingProgress = 0;
+
+                    CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(
+                        GetKitchenObject().GetKitchenObjectSO()
+                    );
+
+                    // Trigger event
+                    OnProgressChanged?.Invoke(
+                        this,
+                        new OnProgressChangedEventArgs
+                        {
+                            progressNormalized =
+                                (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax,
+                        }
+                    );
                 }
             }
             else
@@ -44,37 +75,65 @@ public class CuttingCounter : BaseCounter
         // Only cut the object is valid and not cut yet
         if (HasKitchenObject() && HasRecipewithInput(GetKitchenObject().GetKitchenObjectSO()))
         {
-            KitchenObjectSO outputKitchenSO = GetOutputForInput(
+            cuttingProgress++;
+
+// Trigger event for animation
+    OnCut?.Invoke(this, EventArgs.Empty);
+
+            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(
                 GetKitchenObject().GetKitchenObjectSO()
             );
 
-            // There is a KitchenObject here
-            GetKitchenObject().DestroySelf();
+            // Trigger event for progress bar
+            OnProgressChanged?.Invoke(
+                this,
+                new OnProgressChangedEventArgs
+                {
+                    progressNormalized =
+                        (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax,
+                }
+            );
 
-            KitchenObject.SpawnKitchenObject(outputKitchenSO, this);
+            if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax)
+            {
+                KitchenObjectSO outputKitchenSO = GetOutputForInput(
+                    GetKitchenObject().GetKitchenObjectSO()
+                );
+
+                // There is a KitchenObject here
+                GetKitchenObject().DestroySelf();
+
+                KitchenObject.SpawnKitchenObject(outputKitchenSO, this);
+            }
         }
     }
 
     private bool HasRecipewithInput(KitchenObjectSO inputKitchenSO)
     {
-        foreach (CuttingRecipeSO cuttingRecipeSO in cuttingRecipeSOArray)
-        {
-            if (cuttingRecipeSO.input == inputKitchenSO)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return GetCuttingRecipeSOWithInput(inputKitchenSO) != null;
     }
 
     private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenSO)
+    {
+        CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(inputKitchenSO);
+
+        if (cuttingRecipeSO != null)
+        {
+            return cuttingRecipeSO.output;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private CuttingRecipeSO GetCuttingRecipeSOWithInput(KitchenObjectSO inputKitchenSO)
     {
         foreach (CuttingRecipeSO cuttingRecipeSO in cuttingRecipeSOArray)
         {
             if (cuttingRecipeSO.input == inputKitchenSO)
             {
-                return cuttingRecipeSO.output;
+                return cuttingRecipeSO;
             }
         }
         return null;
