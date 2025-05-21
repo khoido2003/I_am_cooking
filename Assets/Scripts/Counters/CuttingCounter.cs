@@ -1,15 +1,10 @@
 using System;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : BaseCounter, IHasProgress
 {
     // Event for progress bar
-    public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
-
-    public class OnProgressChangedEventArgs : EventArgs
-    {
-        public float progressNormalized;
-    }
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     // Event for animation
     public event EventHandler OnCut;
@@ -42,7 +37,7 @@ public class CuttingCounter : BaseCounter
                     // Trigger event
                     OnProgressChanged?.Invoke(
                         this,
-                        new OnProgressChangedEventArgs
+                        new IHasProgress.OnProgressChangedEventArgs
                         {
                             progressNormalized =
                                 (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax,
@@ -87,7 +82,7 @@ public class CuttingCounter : BaseCounter
             // Trigger event for progress bar
             OnProgressChanged?.Invoke(
                 this,
-                new OnProgressChangedEventArgs
+                new IHasProgress.OnProgressChangedEventArgs
                 {
                     progressNormalized =
                         (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax,
