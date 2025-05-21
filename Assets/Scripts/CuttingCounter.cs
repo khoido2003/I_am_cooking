@@ -77,8 +77,8 @@ public class CuttingCounter : BaseCounter
         {
             cuttingProgress++;
 
-// Trigger event for animation
-    OnCut?.Invoke(this, EventArgs.Empty);
+            // Trigger event for animation
+            OnCut?.Invoke(this, EventArgs.Empty);
 
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(
                 GetKitchenObject().GetKitchenObjectSO()
