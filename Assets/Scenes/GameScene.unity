@@ -1,4 +1,4 @@
-%YAML 1.1
+YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -336,7 +336,7 @@ MonoBehaviour:
   gameInput: {fileID: 289656304}
   counterLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   kitchenObjectHoldPoint: {fileID: 1120905292}
 --- !u!4 &276118897
 Transform:
