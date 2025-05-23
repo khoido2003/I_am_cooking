@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\BurningReccipeSo.cs" />
     <Compile Include="Assets\Scripts\Counters\ClearCounter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\KitchenObjectSO.cs" />
+    <Compile Include="Assets\Scripts\Counters\PlateCounterVisual.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\Counters\CuttingCounterVisual.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Counters\ContainerCounter.cs" />
     <Compile Include="Assets\Scripts\Counters\CuttingCounter.cs" />
+    <Compile Include="Assets\Scripts\Counters\PlatesCounter.cs" />
     <Compile Include="Assets\Scripts\KitchenObject.cs" />
   </ItemGroup>
   <ItemGroup>
