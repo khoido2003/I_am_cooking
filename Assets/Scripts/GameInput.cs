@@ -22,7 +22,7 @@ public class GameInput : MonoBehaviour
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         // Trigger interaction event
-        Debug.Log("Interact action performed");
+        // Debug.Log("Interact action performed");
         OnInteraction?.Invoke(this, EventArgs.Empty);
     }
 
@@ -31,7 +31,7 @@ public class GameInput : MonoBehaviour
     )
     {
         // Trigger interaction event
-        Debug.Log("Interact alternate action performed");
+        // Debug.Log("Interact alternate action performed");
         OnInteractionAlternate?.Invoke(this, EventArgs.Empty);
     }
 

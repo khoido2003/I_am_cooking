@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Counters\ContainerCounterVisual.cs" />
     <Compile Include="Assets\Scripts\ProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\PlateIconSingleUI.cs" />
+    <Compile Include="Assets\Scripts\DeliveryManager.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BurningReccipeSo.cs" />
     <Compile Include="Assets\Scripts\Counters\ClearCounter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\KitchenObjectSO.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Scripts\SelectedCounterVisual.cs" />
     <Compile Include="Assets\Scripts\Counters\BaseCounter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\CuttingRecipeSO.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\RecipeListSO.cs" />
     <Compile Include="Assets\Scripts\Counters\TrashCounter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\FryingRecipeSo.cs" />
     <Compile Include="Assets\Scripts\PlateCompleteVisual.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Assets\Scripts\Counters\CuttingCounter.cs" />
     <Compile Include="Assets\Scripts\Counters\PlatesCounter.cs" />
     <Compile Include="Assets\Scripts\KitchenObject.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\RecipeSO.cs" />
     <Compile Include="Assets\Scripts\Counters\DeliverCounter.cs" />
   </ItemGroup>
   <ItemGroup>

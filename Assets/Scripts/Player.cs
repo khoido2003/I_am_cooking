@@ -44,7 +44,7 @@ public class Player : MonoBehaviour, IKitchentObjectParent
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
-            Debug.Log("Found something here");
+            // Debug.Log("Found something here");
         }
     }
 
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour, IKitchentObjectParent
         if (selectedCounter != null)
         {
             selectedCounter.InteractAlternate(this);
-            Debug.Log("Found something here");
+            // Debug.Log("Found something here");
         }
     }
 
