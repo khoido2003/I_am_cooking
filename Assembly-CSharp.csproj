@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Counters\CuttingCounter.cs" />
     <Compile Include="Assets\Scripts\Counters\PlatesCounter.cs" />
     <Compile Include="Assets\Scripts\KitchenObject.cs" />
+    <Compile Include="Assets\Scripts\Counters\DeliverCounter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_Assets\KitchenChaos_COMPLETE_PROJECT.txt" />
