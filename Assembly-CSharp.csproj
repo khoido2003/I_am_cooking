@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\KitchenObjectSO.cs" />
     <Compile Include="Assets\Scripts\Counters\PlateCounterVisual.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Sounds\SoundManager.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\UI\PlateIconSingleUI.cs" />
     <Compile Include="Assets\Scripts\Counters\CuttingCounterVisual.cs" />
@@ -78,13 +79,16 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\RecipeListSO.cs" />
     <Compile Include="Assets\Scripts\Counters\TrashCounter.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\FryingRecipeSo.cs" />
+    <Compile Include="Assets\Scripts\Sounds\StoveCounterSound.cs" />
     <Compile Include="Assets\Scripts\PlateCompleteVisual.cs" />
     <Compile Include="Assets\Scripts\IKichentObjectParent.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Counters\StoveCounter.cs" />
     <Compile Include="Assets\Scripts\Counters\StoveCounterVisual.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\AudioClipRefsSO.cs" />
     <Compile Include="Assets\Scripts\UI\ProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\IHasProgress.cs" />
+    <Compile Include="Assets\Scripts\Sounds\PlayerSound.cs" />
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
     <Compile Include="Assets\Scripts\Counters\ContainerCounter.cs" />

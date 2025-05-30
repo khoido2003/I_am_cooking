@@ -9,6 +9,9 @@ public class CuttingCounter : BaseCounter, IHasProgress
     // Event for animation
     public event EventHandler OnCut;
 
+    // Event to spwan sound
+    public static event EventHandler OnAnyCut;
+
     [SerializeField]
     private CuttingRecipeSO[] cuttingRecipeSOArray;
 
@@ -88,6 +91,8 @@ public class CuttingCounter : BaseCounter, IHasProgress
 
             // Trigger event for animation
             OnCut?.Invoke(this, EventArgs.Empty);
+
+            OnAnyCut?.Invoke(this, EventArgs.Empty);
 
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(
                 GetKitchenObject().GetKitchenObjectSO()

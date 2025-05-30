@@ -24,8 +24,10 @@ public class DeliverySingleUI : MonoBehaviour
 
         foreach (Transform child in iconContainer)
         {
-            if (child == iconTemplate){
-                continue;}
+            if (child == iconTemplate)
+            {
+                continue;
+            }
 
             Destroy(child.gameObject);
         }
