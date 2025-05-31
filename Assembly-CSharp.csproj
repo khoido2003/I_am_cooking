@@ -62,6 +62,8 @@
   <ItemGroup>
     <Compile Include="Assets\Settings\PlayerInputAction.cs" />
     <Compile Include="Assets\Scripts\Counters\ContainerCounterVisual.cs" />
+    <Compile Include="Assets\Scripts\UI\GameCountDownStartUI.cs" />
+    <Compile Include="Assets\Scripts\KichenGameManager.cs" />
     <Compile Include="Assets\Scripts\DeliveryManager.cs" />
     <Compile Include="Assets\Scripts\UI\PlateIconUI.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BurningReccipeSo.cs" />

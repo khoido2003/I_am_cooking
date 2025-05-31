@@ -43,6 +43,12 @@ public class Player : MonoBehaviour, IKitchentObjectParent
 
     private void GameInput_OnInteraction(object sender, System.EventArgs e)
     {
+        // If not in playing mode then can not interact
+        if (!KichenGameManager.Instance.IsGamePlaying())
+        {
+            return;
+        }
+
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
@@ -52,6 +58,12 @@ public class Player : MonoBehaviour, IKitchentObjectParent
 
     private void GameInput_OnInteractionAlternate(object sender, System.EventArgs e)
     {
+        // If not in playing mode then can not interact
+        if (!KichenGameManager.Instance.IsGamePlaying())
+        {
+            return;
+        }
+
         if (selectedCounter != null)
         {
             selectedCounter.InteractAlternate(this);
