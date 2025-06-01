@@ -18,7 +18,8 @@ public class KichenGameManager : MonoBehaviour
     private State state;
     private float waitingToStartTimer = 1f;
     private float countDownToStartTimer = 3f;
-    private float gamePlayingToStartTimer = 10f;
+    private float gamePlayingTimer;
+    private float gamePlayingTimerMax = 10f;
 
     private void Awake()
     {
@@ -46,14 +47,15 @@ public class KichenGameManager : MonoBehaviour
                 if (countDownToStartTimer < 0f)
                 {
                     state = State.GamePlaying;
+                    gamePlayingTimer = gamePlayingTimerMax;
 
                     OnStateChanged?.Invoke(this, EventArgs.Empty);
                 }
                 break;
 
             case State.GamePlaying:
-                gamePlayingToStartTimer -= Time.deltaTime;
-                if (gamePlayingToStartTimer < 0f)
+                gamePlayingTimer -= Time.deltaTime;
+                if (gamePlayingTimer < 0f)
                 {
                     state = State.GameOver;
 
@@ -78,7 +80,18 @@ public class KichenGameManager : MonoBehaviour
         return state == State.CountdownToStart;
     }
 
-    public float GetCountDownToStartTime() {
+    public float GetCountDownToStartTime()
+    {
         return countDownToStartTimer;
+    }
+
+    public bool IsGameOver()
+    {
+        return state == State.GameOver;
+    }
+
+    public float GetPlayingTimeNormalized()
+    {
+        return 1 - (gamePlayingTimer / gamePlayingTimerMax);
     }
 }

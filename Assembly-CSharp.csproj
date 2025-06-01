@@ -88,8 +88,10 @@
     <Compile Include="Assets\Scripts\Counters\StoveCounter.cs" />
     <Compile Include="Assets\Scripts\Counters\StoveCounterVisual.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\AudioClipRefsSO.cs" />
+    <Compile Include="Assets\Scripts\UI\GameOverUI.cs" />
     <Compile Include="Assets\Scripts\UI\ProgressBarUI.cs" />
     <Compile Include="Assets\Scripts\IHasProgress.cs" />
+    <Compile Include="Assets\Scripts\UI\GameClockUI.cs" />
     <Compile Include="Assets\Scripts\Sounds\PlayerSound.cs" />
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimator.cs" />
