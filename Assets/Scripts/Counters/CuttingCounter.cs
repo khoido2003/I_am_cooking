@@ -12,6 +12,12 @@ public class CuttingCounter : BaseCounter, IHasProgress
     // Event to spwan sound
     public static event EventHandler OnAnyCut;
 
+    // Reset state of the static event - Handle by the ResetStaticsDataManager
+    new public static void ResetStaticData()
+    {
+        OnAnyCut = null;
+    }
+
     [SerializeField]
     private CuttingRecipeSO[] cuttingRecipeSOArray;
 

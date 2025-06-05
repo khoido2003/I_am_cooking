@@ -73,8 +73,10 @@
     <Compile Include="Assets\Scripts\Counters\PlateCounterVisual.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Sounds\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\ResetDataStaticsManager.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\UI\PlateIconSingleUI.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseGameUI.cs" />
     <Compile Include="Assets\Scripts\Counters\CuttingCounterVisual.cs" />
     <Compile Include="Assets\Scripts\SelectedCounterVisual.cs" />
     <Compile Include="Assets\Scripts\Counters\BaseCounter.cs" />

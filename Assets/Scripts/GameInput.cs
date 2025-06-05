@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
+    public static GameInput Instance { get; private set; }
+
     private PlayerInputAction playerInputAction;
 
     // Trigger event when interact with T
@@ -10,13 +13,35 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnInteractionAlternate;
 
+    public event EventHandler OnPauseAction;
+
     private void Awake()
     {
+        Instance = this;
+
         playerInputAction = new PlayerInputAction();
         playerInputAction.Player.Enable();
 
         playerInputAction.Player.Interact.performed += Interact_performed;
         playerInputAction.Player.InteractAlternate.performed += InteractAlternate_performed;
+
+        playerInputAction.Player.Pause.performed += Pause_performed;
+    }
+
+    private void OnDestroy()
+    {
+        // UnSubscribe Event
+        playerInputAction.Player.Interact.performed += Interact_performed;
+        playerInputAction.Player.InteractAlternate.performed += InteractAlternate_performed;
+        playerInputAction.Player.Pause.performed += Pause_performed;
+
+
+        playerInputAction.Dispose();
+    }
+
+    private void Pause_performed(InputAction.CallbackContext context)
+    {
+        OnPauseAction?.Invoke(this, EventArgs.Empty);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

@@ -5,6 +5,12 @@ public class BaseCounter : MonoBehaviour, IKitchentObjectParent
 {
     public static event EventHandler OnAnyObjectPlacedHere;
 
+    // Reset state of the static event - Handle by the ResetStaticsDataManager
+    public static void ResetStaticData()
+    {
+        OnAnyObjectPlacedHere = null;
+    }
+
     [SerializeField]
     private Transform counterTopPoint;
 

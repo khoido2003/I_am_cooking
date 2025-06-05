@@ -11,6 +11,9 @@ public class KichenGameManager : MonoBehaviour
         GameOver,
     }
 
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnPaused;
+
     public event EventHandler OnStateChanged;
 
     public static KichenGameManager Instance { get; private set; }
@@ -21,11 +24,39 @@ public class KichenGameManager : MonoBehaviour
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 10f;
 
+    private bool isGamePause = false;
+
     private void Awake()
     {
         state = State.WaitingToStart;
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+    }
+
+    private void GameInput_OnPauseAction(object sender, EventArgs e)
+    {
+        TogglePauseGame();
+    }
+
+    public void TogglePauseGame()
+    {
+        isGamePause = !isGamePause;
+
+        if (isGamePause)
+        {
+            Time.timeScale = 0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            OnGameUnPaused?.Invoke(this, EventArgs.Empty);
+            Time.timeScale = 1f;
+        }
     }
 
     private void Update()
