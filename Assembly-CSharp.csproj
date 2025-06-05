@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\AudioClipRefsSO.cs" />
     <Compile Include="Assets\Scripts\UI\GameOverUI.cs" />
     <Compile Include="Assets\Scripts\UI\ProgressBarUI.cs" />
+    <Compile Include="Assets\Scripts\MusicManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\LoaderCallback.cs" />
     <Compile Include="Assets\Scripts\IHasProgress.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Assets\Scripts\Counters\PlatesCounter.cs" />
     <Compile Include="Assets\Scripts\UI\DeliverySingleUI.cs" />
     <Compile Include="Assets\Scripts\KitchenObject.cs" />
+    <Compile Include="Assets\Scripts\UI\OptionUI.cs" />
     <Compile Include="Assets\Scripts\UI\PlateKitchenObject.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\RecipeSO.cs" />
     <Compile Include="Assets\Scripts\Counters\DeliverCounter.cs" />
