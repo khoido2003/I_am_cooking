@@ -65,7 +65,27 @@ public class OptionUI : MonoBehaviour
     private Button pauseBtn;
 
     [SerializeField]
+    private Button gamepadInteractBtn;
+
+    [SerializeField]
+    private Button gamepadInteractAltBtn;
+
+    [SerializeField]
+    private Button gamepadPauseBtn;
+
+    [SerializeField]
+    private TextMeshProUGUI gamepadInteractText;
+
+    [SerializeField]
+    private TextMeshProUGUI gamepadInteractAltText;
+
+    [SerializeField]
+    private TextMeshProUGUI gamepadPauseText;
+
+    [SerializeField]
     private Transform pressToRebindKey;
+
+    private Action onCloseBtnAction;
 
     private void Awake()
     {
@@ -86,6 +106,7 @@ public class OptionUI : MonoBehaviour
         closeBtn.onClick.AddListener(() =>
         {
             Hide();
+            onCloseBtnAction();
         });
 
         moveDownBtn.onClick.AddListener(() =>
@@ -115,6 +136,19 @@ public class OptionUI : MonoBehaviour
         pauseBtn.onClick.AddListener(() =>
         {
             Rebinding(GameInput.Binding.Pause);
+        });
+
+        gamepadInteractBtn.onClick.AddListener(() =>
+        {
+            Rebinding(GameInput.Binding.Gamepad_Interact);
+        });
+        gamepadInteractAltBtn.onClick.AddListener(() =>
+        {
+            Rebinding(GameInput.Binding.Gamepad_InteractAlt);
+        });
+        gamepadPauseBtn.onClick.AddListener(() =>
+        {
+            Rebinding(GameInput.Binding.Gamepad_Pause);
         });
     }
 
@@ -146,11 +180,18 @@ public class OptionUI : MonoBehaviour
         interactText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Interact);
         interactAltText.text = GameInput.Instance.GetBindingText(GameInput.Binding.InteractAlt);
         pauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
+        gamepadInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Interact);
+        gamepadInteractAltText.text = GameInput.Instance.GetBindingText(
+            GameInput.Binding.InteractAlt
+        );
+        gamepadPauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
     }
 
-    public void Show()
+    public void Show(Action onCloseBtnAction)
     {
+        this.onCloseBtnAction = onCloseBtnAction;
         gameObject.SetActive(true);
+        soundEffectBtn.Select();
     }
 
     public void Hide()
