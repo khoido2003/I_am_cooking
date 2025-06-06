@@ -117,7 +117,8 @@ public class DeliveryManager : MonoBehaviour
         return waitingRecipeSOList;
     }
 
-    public int GetSuccessfulRecipeAmount() {
+    public int GetSuccessfulRecipeAmount()
+    {
         return successfulRecipeAmount;
     }
 }

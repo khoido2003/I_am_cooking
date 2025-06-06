@@ -25,9 +25,10 @@ public class PauseGameUI : MonoBehaviour
             Loader.Load(Loader.Scene.MenuScene);
         });
 
-        optionBtn.onClick.AddListener(() => {
-OptionUI.Instance.Show();
-                });
+        optionBtn.onClick.AddListener(() =>
+        {
+            OptionUI.Instance.Show();
+        });
     }
 
     private void Start()

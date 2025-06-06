@@ -98,7 +98,6 @@ public class KichenGameManager : MonoBehaviour
 
                 break;
         }
-        Debug.Log(state);
     }
 
     public bool IsGamePlaying()
