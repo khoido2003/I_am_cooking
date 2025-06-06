@@ -31,6 +31,8 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnPauseAction;
 
+    public event EventHandler OnBindingRebind;
+
     private void Awake()
     {
         Instance = this;
@@ -229,6 +231,8 @@ public class GameInput : MonoBehaviour
                         playerInputAction.SaveBindingOverridesAsJson()
                     );
                     PlayerPrefs.Save();
+
+                    OnBindingRebind?.Invoke(this, EventArgs.Empty);
                 }
             )
             .Start();

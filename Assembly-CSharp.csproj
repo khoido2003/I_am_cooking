@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\KichenGameManager.cs" />
     <Compile Include="Assets\Scripts\Loader.cs" />
     <Compile Include="Assets\Scripts\DeliveryManager.cs" />
+    <Compile Include="Assets\Scripts\UI\TutorialUI.cs" />
     <Compile Include="Assets\Scripts\UI\PlateIconUI.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BurningReccipeSo.cs" />
     <Compile Include="Assets\Scripts\Counters\ClearCounter.cs" />
